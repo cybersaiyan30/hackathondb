@@ -19,6 +19,6 @@ from lpblog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('insertintoblog',views.insertintoblog,name='insertintoblog'),
+    path('set_posts',views.set_posts,name='set_posts'),
     path('get_posts',views.get_posts,name='get_posts'),
 ]
