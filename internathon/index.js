@@ -18,23 +18,26 @@ document.getElementById("putshithere").innerHTML=document.getElementById("putshi
        // alert(xhr.status + ": " + xhr.responseText);
     }
 });
+
+$('#post_button').on('click', function () {
+alert("anything");
 $.ajax({
     url : "http://127.0.0.1:8000/set_posts",
     type : "POST",
     dataType: "json",
     data : {
-        'post_id':'1',
+        'post_id':'2',
         'post_caption':'eno ondhu',
         'lp':'bias for action',
         'likes':'40',
         'post_url':"bisibelebath",
         },
     success : function(json) {
-         window.location.href="http://localhost:63342/internathon/internathon.html"
+        //  window.location.href="http://localhost:63342/internathon/internathon.html"
+    alert("kash");
     },
     error : function(xhr,errmsg,err) {
 //        alert(xhr.status + ": " + xhr.responseText);
     }
 });
-
-
+});

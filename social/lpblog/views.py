@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 import pymysql
+import random
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status, views
@@ -14,14 +15,13 @@ def set_posts(request):
     print("Calling set post")
     import uuid
     import random
-    con = pymysql.connect(host='localhost', user='root', password='Naruto9tails', db='social', charset='utf8mb4',
+    con = pymysql.connect(host='localhost', user='root', password='Detergent#99', db='social', charset='utf8mb4',
                           cursorclass=pymysql.cursors.DictCursor)
     cursor1 = con.cursor()
     post_caption = request.POST.get('caption')
-    post_id = uuid.uuid1()
-    post_id = post_id.int
+    post_id = random.randint(1,100)
     lp = request.POST.get("caption")
-    likes = random.randrange[30,70]
+    likes = 43
     post_url = request.POST.get('pic')
     print(post_id, post_caption, lp, likes, post_url)
     try:
@@ -37,7 +37,7 @@ def set_posts(request):
 
 @api_view(('GET',))
 def get_posts(request):
-    con = pymysql.connect(host='localhost', user='root', password='Naruto9tails', db='social', charset='utf8mb4',
+    con = pymysql.connect(host='localhost', user='root', password='Detergent#99', db='social', charset='utf8mb4',
                           cursorclass=pymysql.cursors.DictCursor)
     cursor2 = con.cursor()
     cursor2.execute('select * from posts')
