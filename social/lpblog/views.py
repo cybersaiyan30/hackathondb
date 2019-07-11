@@ -9,36 +9,43 @@ from rest_framework import status, views
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
-con = pymysql.connect(host='localhost', user='root', password='Detergent#99', db='social', charset='utf8mb4',
-                      cursorclass=pymysql.cursors.DictCursor)
-
-
 @api_view(('POST',))
 def set_posts(request):
+    print("Calling set post")
+    import uuid
+    import random
+    con = pymysql.connect(host='localhost', user='root', password='Naruto9tails', db='social', charset='utf8mb4',
+                          cursorclass=pymysql.cursors.DictCursor)
     cursor1 = con.cursor()
-    post_id = request.POST.get('post_id')
-    post_caption = request.POST.get('post_caption')
-    lp = request.POST.get('lp')
-    likes = request.POST.get('likes')
-    post_url = request.POST.get('post_url')
-    print(post_id, )
+    post_caption = request.POST.get('caption')
+    post_id = uuid.uuid1()
+    post_id = post_id.int
+    lp = request.POST.get("caption")
+    likes = random.randrange[30,70]
+    post_url = request.POST.get('pic')
+    print(post_id, post_caption, lp, likes, post_url)
     try:
         cursor1.execute(
             ("insert into posts values({0},'{1}','{2}',{3},'{4}');").format(post_id, post_caption, lp, likes, post_url))
         cursor1.close()
+        con.commit()
+        con.close()
     except Exception as e:
         print(e)
-    return Response(status=200)
+    return HttpResponse("200")
 
 
 @api_view(('GET',))
 def get_posts(request):
+    con = pymysql.connect(host='localhost', user='root', password='Naruto9tails', db='social', charset='utf8mb4',
+                          cursorclass=pymysql.cursors.DictCursor)
     cursor2 = con.cursor()
-    cursor2.execute('select * from posts;')
+    cursor2.execute('select * from posts')
     posts = cursor2.fetchall()
     cursor2.close()
+    con.commit()
+    con.close()
     return Response(status=200, data={"posts": posts})
 
 
-con.commit()
+
